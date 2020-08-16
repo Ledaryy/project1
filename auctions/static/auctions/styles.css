@@ -1,0 +1,101 @@
+
+body {
+    margin: 0;
+    padding: 10px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    color: #6c7279;
+    -webkit-font-smoothing: antialiased;
+    
+}
+
+li {
+    
+    color: pink
+}
+h1 {
+    color: wheat;
+}
+a:hover, a:active, a {
+    text-decoration: none;
+    color: #000000;
+}
+.container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
+    left: auto;
+    
+}
+
+
+.listing {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px 0;
+    
+}
+
+.listing__text {
+    font-family: 'Raleway';
+
+}
+
+.listing__item {
+    width: 100%;
+    border: 1px solid #cecbcb;
+    margin: 5px 0;
+    border-radius: 5px;
+
+}
+
+.listing__icon {
+    position: relative;
+    width: auto;
+    height: auto;
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.lot__image {
+    width: auto;
+    height: auto;
+    max-width: 600px;
+    max-height: 600px;
+    padding: 10px 0;
+    border: 2px solid #aaaaaa;
+    border-radius: 5px;
+}
+
+.lot__title {
+    font-size: 50px;
+    color: #000000;
+}
+
+.btn {
+    display: inline-block;
+    vertical-align: top;
+    padding: 14px 40px;
+
+    border-radius: 2px;
+    cursor: pointer;
+
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+
+}
+
+.btn--red {
+    background-color: #e84545;
+
+}
+
+.btn--blue {
+    background-color: #4570e8;
+    padding: 14px 20px;
+
+}

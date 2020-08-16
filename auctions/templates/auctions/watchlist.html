@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    
+    <div class="container">
+        <div class="listing">
+        {% for auction in auctions %}
+        
+            <div class="listing__item">
+            <a href="{% url 'listing' auction.id%}">
+                <h4 class="listing__title">Listing: {{ auction.lot }}</h4>
+                <img class="listing__icon" src="{{ auction.url }}">
+                <div class="listing__text">Category: {{ auction.category }}</div>
+                <div class="listing__text">Destription: {{ auction.description }}</div>
+                <div class="listing__text">Start bid: {{ auction.startBid }}</div>
+                <div class="listing__text">Owner: {{ auction.owner }}</div>
+            </a>
+            </div>
+        
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+    
+    
+{% endblock %}

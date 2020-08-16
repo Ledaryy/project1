@@ -1,0 +1,90 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="container">
+        <div class="lot__item">
+            <h3 class="lot__title">Listing: {{ auction.lot }}</h3>  
+            
+            <img class="lot__image" src="{{ auction.url }}">
+            {% if user.is_authenticated %}
+            <div>
+                <a class="btn btn--blue" href="{% url 'addToWatchlist' auction.id %}">{{ watchlist }}</a>
+            </div>
+            {% endif %}
+            <div class="lot__text">Category: {{ auction.category }}</div>
+            <div class="lot__text">Destription: {{ auction.description }}</div>
+            <div class="lot__text">Start bid: {{ auction.startBid }}</div>
+            <div class="listing__text">Current price: {{ auction.currentBid }}</div>
+            <div class="lot__text">Owner: {{ auction.owner }}</div>
+        </div>  
+
+    {% if closed == False %}
+
+        </div>
+                <h4> Previous bids: </h4>
+                <ul>
+                    {% for bid in bids %}
+                    <li>
+                        {{ bid.owner }}[{{bid.time}}]: {{bid.bid}}
+                    </li>
+                    {% empty %}
+                    No bids.
+                    {% endfor %}
+                </ul>
+        {% if user.is_authenticated %}
+        <form action="{% url 'listing' auction.id %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+
+                <h4>Place bid: </h4>
+               {{ bidForm.bid }}
+               {% if message %}
+               <div class="alert alert-danger" role="alert">
+                {{ message }}
+                </div>
+                {% endif %}
+            </div>
+            <input class="btn btn-primary" type="submit" value="Place bid">
+        </form>
+         {% endif %}
+          <h4> Comments: </h4>
+                <ul>
+                    {% for comment in comments %}
+                    <li>
+                        {{ comment.owner }}[{{comment.time}}]: {{comment.comment}}
+                    </li>
+                    {% empty %}
+                    No comments.
+                    {% endfor %}
+                </ul>
+         {% if user.is_authenticated %}
+        <form action="{% url 'listing' auction.id %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <h4>Leave comment: </h4>
+               {{ commentForm.comment }}  
+            </div>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+        {% else %}
+            Not signed in to place bids or leave comments.
+        {% endif %}
+        {% if owner %}
+                <div>
+                    <a class="btn btn--red" href="{% url 'closeAuction' auction.id %}">Close this auction (owner)</a>
+                </div>
+        {% endif %}
+    {% else %}
+        {% if owner %}
+        <h1>
+        Auction closed, winner: {{ winner }}
+        </h1>
+        {% else %}
+        <h1>
+        Auction closed
+        </h1>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
